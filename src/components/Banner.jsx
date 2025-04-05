@@ -1,6 +1,6 @@
 import React from "react";
 // images
-import Image from "../assets/avatar.png";
+import Image from "../assets/avatar.PNG";
 
 // icons
 import { FaGithub, FaYoutube, FaDribbble } from "react-icons/fa";
