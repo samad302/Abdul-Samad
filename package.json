@@ -2,7 +2,7 @@
   "name": "portfolio",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://samad302.github.io/Abdul-Samad",
+  "homepage": "https://samad302.github.io/Abdul-Samad/",
   "type": "module",
   "scripts": {
     "dev": "vite",
