@@ -6,21 +6,21 @@ import { fadeIn } from '../variants';
 
 const About = () => {
   const [ref, Inview] = useInView({
-    threshold: 0.5,
+    threshold: 0.3, // Lowered threshold for mobile
   });
   
   return (
     <section className='section' id='About' ref={ref}>
       <div className="container mx-auto">
-        <div className='flex flex-col gap-y-10 lg:flex-row lg:items-center lg:gap-x-20 lg:gap-y-0 h-screen'>
+        <div className='flex flex-col gap-y-10 lg:flex-row lg:items-center lg:gap-x-20 lg:gap-y-0'>
           {/* Image Section - Fixed */}
           <motion.div
             variants={fadeIn('right', 0.3)}
             initial="hidden"
             whileInView={'show'}
-            viewport={{ once: false, amount: 0.7 }}
+            viewport={{ once: false, amount: 0.3 }} // Lowered amount for mobile
             className='flex-1 bg-about bg-no-repeat bg-center 
-                      w-full h-[400px] sm:h-[450px] md:h-[500px] lg:h-[600px]
+                      w-full h-[300px] sm:h-[450px] md:h-[500px] lg:h-[600px]
                       bg-contain sm:bg-cover
                       mx-auto'
           ></motion.div>
@@ -30,14 +30,13 @@ const About = () => {
             variants={fadeIn('left', 0.5)}
             initial="hidden"
             whileInView={'show'}
-            viewport={{ once: false, amount: 0.7 }}
-            className='flex-1'
+            viewport={{ once: false, amount: 0.3 }} // Lowered amount for mobile
+            className='flex-1 px-4' // Added padding for mobile
           >
             <h2 className='h2 text-accent'>About Me</h2>
             <h3 className='h3 mb-4'>I'm a Freelancer Full Stack Developer with over 3 years of experience.</h3>
             <p className='mb-6'>
-            I'm a Full Stack Web Developer . I specialize in building high-performance, SEO-optimized web applications with responsive front-end designs and scalable back-end architecture. From interactive 
-            user interfaces to fast-loading, mobile-friendly websites, I deliver solutions that boost visibility and drive results.
+              I'm a Full Stack Web Developer. I specialize in building high-performance, SEO-optimized web applications with responsive front-end designs and scalable back-end architecture.
             </p>
 
             <div className='flex gap-x-6 lg:gap-x-10 mb-12'>
