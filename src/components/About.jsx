@@ -33,7 +33,7 @@ const About = () => {
             className='w-full lg:w-1/2'
           >
             <h2 className='h2 text-accent'>About Me</h2>
-            <h3 className='h3 mb-4'>I'm a Freelancer Full Stack Developer with over 3 years of experience.</h3>
+            <h3 className='h3 mb-4'>I'm a nothing Full Stack Developer with over 3 years of experience.</h3>
             <p className='mb-6'>
               I'm a Full Stack Web Developer. I specialize in building high-performance, SEO-optimized web applications.
             </p>

@@ -27,7 +27,7 @@ const Nav = () => {
       activeClass='active'
       smooth={true}
       spy={true} 
-       className='cursor-pointer w-[60] flex items-center justify-center'>
+       className='cursor-pointer w-[60] h-[60px] flex items-center justify-center'>
       <BiUser />
 
       </Link  >
