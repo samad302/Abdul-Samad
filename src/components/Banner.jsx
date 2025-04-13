@@ -58,9 +58,7 @@ const Banner = () => {
               viewport={{ once: false, amount: 0.7 }}
               className="mb-8 max-w-lg mx-auto lg:mx-0"
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Voluptatume. Rerum ipsam architecto dolore soluta. Molestias,
-              maiores qui?
+              Professional Full Stack Developer building fast, scalable, and user-focused web applications. Let’s create something amazing together.
             </motion.p>
             <motion.div
               variants={fadeIn("up", 0.6)}

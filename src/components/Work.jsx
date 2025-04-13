@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, animate } from 'framer-motion';
 import Img1 from '../assets/portfolio-img1.png';
 import Img2 from '../assets/portfolio-img2.png';
+import Img3 from '../assets/portfolio-img-3.png';
 import Img5 from '../assets/portfolio-img5.png';
 import { fadeIn } from '../variants';
 
@@ -41,19 +42,13 @@ const Work = () => {
 
     {
       id: 4,
-      img: Img5,
-      link: "https://samm-fitness.vercel.app/",
-      type: "HTML/CSS/JS",
-      title: "Samm-Fitness"
+      img: Img3,
+      link: "https://sammadjawaid465.wixstudio.com/my-site-1",
+      type: "Wix Studio Design",
+      title: "Volaso"
     },
 
-    {
-      id: 5,
-      img: Img5,
-      link: "https://samm-fitness.vercel.app/",
-      type: "HTML/CSS/JS",
-      title: "Samm-Fitness"
-    },
+
     // Add more projects as needed
   ];
 
