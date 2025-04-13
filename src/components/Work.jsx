@@ -1,133 +1,185 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useMotionValue, animate } from 'framer-motion';
 import Img1 from '../assets/portfolio-img1.png';
 import Img2 from '../assets/portfolio-img2.png';
 import Img5 from '../assets/portfolio-img5.png';
 import { fadeIn } from '../variants';
 
 const Work = () => {
+  const marqueeRef = useRef(null);
+  const containerRef = useRef(null);
+  const x = useMotionValue(0);
+  const cardWidth = 350; // Width of each project card
+  const gap = 16; // Gap between cards (mx-4 = 16px)
+  const [maxScroll, setMaxScroll] = useState(0);
+  const [showLeftBtn, setShowLeftBtn] = useState(false);
+  const [showRightBtn, setShowRightBtn] = useState(true);
+
+  // Projects data
+  const allProjects = [
+    {
+      id: 1,
+      img: Img1,
+      link: "https://samad302.github.io/A-shop/",
+      type: "UI/UX Design",
+      title: "A-Shop"
+    },
+    {
+      id: 2,
+      img: Img2,
+      link: "https://get-me-a-chai-phi.vercel.app",
+      type: "Next.js/Mongodb/Stripe",
+      title: "Get me a chai"
+    },
+    {
+      id: 3,
+      img: Img5,
+      link: "https://samm-fitness.vercel.app/",
+      type: "HTML/CSS/JS",
+      title: "Samm-Fitness"
+    },
+
+    {
+      id: 4,
+      img: Img5,
+      link: "https://samm-fitness.vercel.app/",
+      type: "HTML/CSS/JS",
+      title: "Samm-Fitness"
+    },
+
+    {
+      id: 5,
+      img: Img5,
+      link: "https://samm-fitness.vercel.app/",
+      type: "HTML/CSS/JS",
+      title: "Samm-Fitness"
+    },
+    // Add more projects as needed
+  ];
+
+  // Duplicate projects for seamless looping
+  const marqueeProjects = [...allProjects, ...allProjects];
+  const totalWidth = (cardWidth + gap * 2) * marqueeProjects.length;
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const containerWidth = containerRef.current.offsetWidth;
+      setMaxScroll(containerWidth - totalWidth);
+      updateButtonVisibility();
+    }
+  }, [totalWidth]);
+
+  const updateButtonVisibility = () => {
+    const currentX = x.get();
+    setShowLeftBtn(currentX < -10);
+    setShowRightBtn(currentX > maxScroll + 10);
+  };
+
+  const scrollTo = (targetX) => {
+    animate(x, targetX, {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+      onUpdate: updateButtonVisibility
+    });
+  };
+
+  const scrollLeft = () => {
+    const newX = Math.min(x.get() + (cardWidth + gap * 2), 0);
+    scrollTo(newX);
+  };
+
+  const scrollRight = () => {
+    const newX = Math.max(x.get() - (cardWidth + gap * 2), maxScroll);
+    scrollTo(newX);
+  };
+
+  const handleDragEnd = () => {
+    updateButtonVisibility();
+  };
+
   return (
     <section className='section' id='Work'>
-      <div className='container mx-auto'>
-        <div className='flex flex-col lg:flex-row gap-x-10'>
-          <motion.div
-            variants={fadeIn('right', 0.3)}
-            initial="hidden"
-            whileInView={'show'}
-            viewport={{ once: false, amount: 0.3 }}
-            className='flex-1 flex flex-col gap-y-10 mb-10 lg:mb-0'>
-            {/* text */}
-            <div >
-              <h2 className='h2 leading-tight text-accent'>
-                My Latest <br />
-                Work
-              </h2>
-              <p className='max-w-sm mb-16'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit
-                corporis consequatur libero, expedita eveniet itaque asperiores inventore? Cupiditate,
-                ipsum aliquid?</p>
-              <button className='btn btn-sm'>View all projects</button>
-            </div>
-            {/* image */}
-            <div className='group relative overflow-hidden border-2 border-white/50 rounded-xl'>
-              {/* overlay */}
-              <div className='group-hover:bg-black/70 w-full h-full absolute z-40 transition-all duration-300'></div>
+      <div className='container mx-auto px-4 relative'>
+        {/* Text Content at Top */}
+        <motion.div
+          variants={fadeIn('up', 0.3)}
+          initial="hidden"
+          whileInView={'show'}
+          viewport={{ once: false, amount: 0.3 }}
+          className='text-center mb-16'
+        >
+          <h2 className='h2 leading-tight text-accent mb-4'>
+            My Latest Work
+          </h2>
+          <p className='max-w-2xl mx-auto mb-8'>
+            Use buttons or drag to scroll through projects
+          </p>
+          <button className='btn btn-sm'>View all projects</button>
+        </motion.div>
 
-              {/* Image with hover-only link */}
-              <div className="relative">
+        {/* Marquee Container */}
+        <div 
+          ref={containerRef}
+          className='relative w-full overflow-hidden h-[300px]'
+        >
+          {/* Scroll Buttons */}
+          {showLeftBtn && (
+            <button 
+              onClick={scrollLeft}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-50 bg-black/50 hover:bg-black/70 text-white rounded-full w-10 h-10 flex items-center justify-center ml-2 transition-all"
+              aria-label="Scroll left"
+            >
+              &larr;
+            </button>
+          )}
+          
+          {showRightBtn && (
+            <button 
+              onClick={scrollRight}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-50 bg-black/50 hover:bg-black/70 text-white rounded-full w-10 h-10 flex items-center justify-center mr-2 transition-all"
+              aria-label="Scroll right"
+            >
+              &rarr;
+            </button>
+          )}
+
+          <motion.div 
+            ref={marqueeRef}
+            className='flex whitespace-nowrap'
+            drag="x"
+            dragConstraints={{ left: maxScroll, right: 0 }}
+            dragElastic={0.1}
+            style={{ x }}
+            onDragEnd={handleDragEnd}
+          >
+            {marqueeProjects.map((project, index) => (
+              <div 
+                key={`${project.id}-${index}`} 
+                className='group relative overflow-hidden border-2 border-white/50 rounded-xl mx-4 w-[350px] h-[250px] flex-shrink-0 select-none'
+              >
+                <div className='group-hover:bg-black/70 w-full h-full absolute z-40 transition-all duration-300'></div>
                 <img 
-                  className='group-hover:scale-125 transition-all duration-500'
-                  src={Img1}
-                  alt="Project 1" 
+                  className='group-hover:scale-125 transition-all duration-500 w-full h-full object-cover pointer-events-none'
+                  src={project.img}
+                  alt={`Project ${project.title}`} 
+                  draggable="false"
                 />
-                {/* Invisible clickable overlay that only appears on hover */}
                 <a 
-                  href="https://samad302.github.io/A-shop/" 
+                  href={project.link} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute inset-0 z-50 opacity-0 group-hover:opacity-100 cursor-pointer"
-                  aria-label="View Project 1"
-                ></a>
-              </div>
-
-              {/* pretitle */}
-              <div className='absolute -bottom-full left-12 group-hover:bottom-24 transition-all duration-500 z-50'>
-                <span className='text-gradient'>UI/UX Design</span>
-              </div>
-              {/* title */}
-              <div className='absolute -bottom-full left-12 group-hover:bottom-14 transition-all duration-700 z-50'>
-                <span className='text-3xl text-white'>A-Shop </span>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            variants={fadeIn('left', 0.2)}
-            whileInView={'show'}
-            viewport={{ once: false, amount: 0.3 }}
-            className='flex-1 flex flex-col gap-y-16'>
-            {/* image 2 */}
-            <div className='group relative overflow-hidden border-2 border-white/50 rounded-xl'>
-              {/* overlay */}
-              <div className='group-hover:bg-black/70 w-full h-full absolute z-40 transition-all duration-300'></div>
-
-              {/* Image with hover-only link */}
-              <div className="relative">
-                <img 
-                  className='group-hover:scale-125 transition-all duration-500'
-                  src={Img2}
-                  alt="Project 2" 
+                  className="absolute inset-0 z-50"
+                  aria-label={`View ${project.title}`}
                 />
-                {/* Invisible clickable overlay that only appears on hover */}
-                <a 
-                  href="https://get-me-a-chai-phi.vercel.app" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute inset-0 z-50 opacity-0 group-hover:opacity-100 cursor-pointer"
-                  aria-label="View Project 2"
-                ></a>
+                <div className='absolute -bottom-full left-6 group-hover:bottom-16 transition-all duration-500 z-50'>
+                  <span className='text-gradient'>{project.type}</span>
+                </div>
+                <div className='absolute -bottom-full left-6 group-hover:bottom-8 transition-all duration-700 z-50'>
+                  <span className='text-2xl text-white'>{project.title}</span>
+                </div>
               </div>
-
-              {/* pretitle */}
-              <div className='absolute -bottom-full left-12 group-hover:bottom-24 transition-all duration-500 z-50'>
-                <span className='text-gradient'>Next.js/Mongodb/Stripe</span>
-              </div>
-              {/* title */}
-              <div className='absolute -bottom-full left-12 group-hover:bottom-14 transition-all duration-700 z-50'>
-                <span className='text-3xl text-white'>Get me a chai</span>
-              </div>
-            </div>
-
-            {/* image 3  */}
-            <div className='group relative overflow-hidden border-2 border-white/50 rounded-xl'>
-              {/* overlay */}
-              <div className='group-hover:bg-black/70 w-full h-full absolute z-40 transition-all duration-300'></div>
-
-              {/* Image with hover-only link */}
-              <div className="relative">
-                <img 
-                  className='group-hover:scale-125 transition-all duration-500'
-                  src={Img5}
-                  alt="Samm-Fitness Project" 
-                />
-                {/* Invisible clickable overlay that only appears on hover */}
-                <a 
-                  href="https://samm-fitness.vercel.app/" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute inset-0 z-50 opacity-0 group-hover:opacity-100 cursor-pointer"
-                  aria-label="View Samm-Fitness project"
-                ></a>
-              </div>
-
-              {/* pretitle */}
-              <div className='absolute -bottom-full left-12 group-hover:bottom-24 transition-all duration-500 z-50'>
-                <span className='text-gradient'>HTML/CSS/JS</span>
-              </div>
-              {/* title */}
-              <div className='absolute -bottom-full left-12 group-hover:bottom-14 transition-all duration-700 z-50'>
-                <span className='text-3xl text-white'>Samm-Fitness</span>
-              </div>
-            </div>
+            ))}
           </motion.div>
         </div>
       </div>

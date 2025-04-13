@@ -47,7 +47,9 @@ const Nav = () => {
       activeClass='active'
       smooth={true}
       spy={true} 
-       className='cursor-pointer w-[60] flex items-center justify-center'>
+      offset={50}
+
+       className='cursor-pointer w-[70] h-[60px] flex items-center justify-center'>
       <BsBriefcase />
 
       </Link>
@@ -55,6 +57,7 @@ const Nav = () => {
       activeClass='active'
       smooth={true}
       spy={true} 
+      offset={0}
        className='cursor-pointer w-[60] flex items-center justify-center'>
       <BsChatSquareText />
 
