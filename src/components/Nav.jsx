@@ -27,6 +27,8 @@ const Nav = () => {
       activeClass='active'
       smooth={true}
       spy={true} 
+      offset={50}
+
        className='cursor-pointer w-[60] h-[60px] flex items-center justify-center'>
       <BiUser />
 
@@ -35,7 +37,9 @@ const Nav = () => {
       activeClass='active'
       smooth={true}
       spy={true} 
-       className='cursor-pointer w-[60] flex items-center justify-center'>
+      offset={50}
+
+       className='cursor-pointer w-[60] h-[60px] flex items-center justify-center'>
       <BsClipboard2DataFill />
 
       </Link>
