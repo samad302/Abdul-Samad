@@ -10,27 +10,24 @@ import { fadeIn } from '../variants';
 const services = [
   {
     name: 'Developer',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. In perspiciatis illo nostrum, esse cum architecto delectus rerum quaerat obcaecati vitae.',
+    description: 'Expert web and app development services with modern frameworks. Build scalable, secure, and high-performance digital solutions tailored to your needs.',
     link: 'Learn More',
   },
   {
     name: 'Digital Marketing',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. In perspiciatis illo nostrum, .',
-    link: 'Learn More',
+    description: 'Data-driven marketing strategies that boost visibility and conversions. SEO, PPC, and social media campaigns that deliver measurable results.',
+    link: 'Learn More', 
   },
   {
     name: 'UI/UX Design',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. In perspiciatis illo nostrum, .',
+    description: 'User-centered interface design that enhances engagement. Intuitive navigation and beautiful aesthetics for seamless digital experiences.',
     link: 'Learn More',
   },
   {
     name: 'Product Branding',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. In perspiciatis illo nostrum, .',
+    description: 'Strategic branding that tells your unique story. Logo design, visual identity, and positioning that makes your product unforgettable.',
     link: 'Learn More',
+  
   },
 ];
 

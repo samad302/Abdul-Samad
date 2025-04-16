@@ -16,7 +16,23 @@ const Contact = () => {
           >
             <div>
               <p className='text-7xl leading-tight text-accent'>Get In Touch</p>
-              <h2 className='max-w-sm mb-26 text-gray-300'>Feel free to reach out for any inquiries or collaborations.</h2>
+              <h2 className='max-w-sm mb-6 text-gray-300'>Feel free to reach out for any inquiries or collaborations.</h2>
+              
+              {/* Added Contact Info */}
+              <div className='mt-8 space-y-4'>
+                <div className='flex items-center gap-4'>
+                  <span className='text-accent text-xl'>📧</span>
+                  <a href="mailto:your@email.com" className='text-gray-300 hover:text-accent transition-colors'>
+                  sammadjawaid465@gmail.com
+                  </a>
+                </div>
+                <div className='flex items-center gap-4'>
+                  <span className='text-accent text-xl'>📱</span>
+                  <a href="tel:+1234567890" className='text-gray-300 hover:text-accent transition-colors'>
+                    +92 3052237725
+                  </a>
+                </div>
+              </div>
             </div>
           </motion.div>
           
