@@ -22,13 +22,13 @@ const Contact = () => {
               <div className='mt-8 space-y-4'>
                 <div className='flex items-center gap-4'>
                   <span className='text-accent text-xl'>📧</span>
-                  <a href="mailto:your@email.com" className='text-gray-300 hover:text-accent transition-colors'>
+                  <a href="mailto:sammadjawaid465@gmail.com" className='text-gray-300 hover:text-accent transition-colors'>
                   sammadjawaid465@gmail.com
                   </a>
                 </div>
                 <div className='flex items-center gap-4'>
                   <span className='text-accent text-xl'>📱</span>
-                  <a href="tel:+1234567890" className='text-gray-300 hover:text-accent transition-colors'>
+                  <a href="tel:+923052237725" className='text-gray-300 hover:text-accent transition-colors'>
                     +92 3052237725
                   </a>
                 </div>
